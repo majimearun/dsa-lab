@@ -126,14 +126,14 @@ void find_matching_perm(char *s1, char *s2, int n)
         start = 0;
         while (start < n)
         {
-            posn = find_posn(s1[i], s2, 0);
+            posn = find_posn(s1[i], s2, start);
             if (unused[posn])
             {
                 printf("%d ", posn + 1);
                 unused[posn] = 0;
                 break;
             }
-            start = posn;
+            start = posn + 1;
         }
     }
     printf("\n");
@@ -182,7 +182,6 @@ int main()
     }
     else
     {
-        // printf("POSSIBLE\n");
         find_matching_perm(a, s, s_len);
     }
 }
