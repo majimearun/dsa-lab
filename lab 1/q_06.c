@@ -60,6 +60,7 @@ int main()
     int a, b;
     scanf("%d %d", &a, &b);
     int *primes = sieve(b);
+    primes[0] = primes[1] = 0;
     for (int i = a; i <= b; i++)
     {
         if (primes[i])
