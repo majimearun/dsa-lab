@@ -21,8 +21,6 @@ void gen_id(Info *info)
     {
         id[i++] = info->email[j];
     }
-    id[i++] = 'P';
-    id[i++] = 'S';
     if (strcmp(info->branch, "CS") == 0)
     {
         id[i++] = 'A';
@@ -38,13 +36,14 @@ void gen_id(Info *info)
         id[i++] = 'A';
         id[i++] = '3';
     }
+    id[i++] = 'P';
+    id[i++] = 'S';
     for (int j = 5; j < 9; ++j)
     {
         id[i++] = info->email[j];
     }
     id[i++] = 'H';
     info->id = id;
-
 }
 
 int main()
