@@ -39,7 +39,7 @@ int main()
     int *pres = (int *)malloc(n * sizeof(int));
     for (int i = 0; i < n; i++)
     {
-        pres[i] = 1;
+        pres[i] = 0;
     }
     subset_sum(arr, n, target_sum, pres, n);
     printf("NOT POSSIBLE\n");

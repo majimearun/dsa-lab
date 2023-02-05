@@ -159,8 +159,14 @@ int main()
     }
     // format: left, up, right, down
     int done[] = {0, 0, 0, 0};
+    int start = (2 * n) - 2, end = (2 * n) - 2, reps = 1;
+    if(n%2 == 0){
+        done[0] = done[1] = 1;
+        start = end = 0;
+        reps = 2;
+    }
 
-    create_spiral(matrix, n, done, (2 * n) - 2, (2 * n) - 2, 2 * (n * n), 0, n, 1);
+    create_spiral(matrix, n, done, start, end, 2 * (n * n), 0, n, reps);
 
     for (int i = 0; i < (2 * n) - 1; i++)
     {
