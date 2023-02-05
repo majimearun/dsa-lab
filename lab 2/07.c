@@ -99,18 +99,36 @@ Node *removeRepeatedNodes(Node *head)
     {
         if (cur->data == nxt->data)
         {
-            while (nxt != NULL && cur->data == nxt->data)
+            if (cur != head)
             {
-                temp_free = nxt;
-                nxt = nxt->next;
-                free(temp_free);
-            }
-            prev->next = nxt;
-            free(cur);
-            cur = nxt;
-            if (nxt != NULL)
-            {
-                nxt = nxt->next;
+                while (nxt != NULL && cur->data == nxt->data)
+                {
+                    temp_free = nxt;
+                    nxt = nxt->next;
+                    free(temp_free);
+                }
+                prev->next = nxt;
+                free(cur);
+                cur = nxt;
+                if (nxt != NULL)
+                {
+                    nxt = nxt->next;
+                }
+            }else{
+                while (nxt != NULL && cur->data == nxt->data)
+                {
+                    temp_free = nxt;
+                    nxt = nxt->next;
+                    free(temp_free);
+                }
+                prev->next = nxt;
+                free(cur);
+
+                head = cur = nxt;
+                if (nxt != NULL)
+                {
+                    nxt = nxt->next;
+                }
             }
         }
         else
