@@ -114,7 +114,9 @@ Node *removeRepeatedNodes(Node *head)
                 {
                     nxt = nxt->next;
                 }
-            }else{
+            }
+            else
+            {
                 while (nxt != NULL && cur->data == nxt->data)
                 {
                     temp_free = nxt;
