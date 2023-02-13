@@ -26,15 +26,8 @@ int find_last_occurence(int *arr, int start, int end, int team)
     return -1;
 }
 
-int main()
+int find_k_teams(int *arr, int n)
 {
-    int n;
-    scanf("%d", &n);
-    int *arr = (int *)malloc(n * sizeof(int));
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
     int k = 0;
     int team = arr[0];
     int start = 0;
@@ -50,8 +43,21 @@ int main()
         }
         else
         {
-            break
+            break;
         }
     }
+    return k;
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int *arr = (int *)malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int k = find_k_teams(arr, n);
     printf("%d\n", k);
 }
