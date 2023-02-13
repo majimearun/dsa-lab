@@ -1,29 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int sum(int *arr, int n)
-{
-    int s = 0;
-    for (int i = 0; i < n; i++)
-    {
-        s += arr[i];
-    }
-    return s;
-}
-
-int max(int *arr, int n)
-{
-    int m = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] > m)
-        {
-            m = arr[i];
-        }
-    }
-    return m;
-}
-
 int check(int *arr, int n, int size, int k)
 {
     int count = 0;
@@ -65,11 +42,16 @@ int main()
     scanf("%d", &n);
     scanf("%d", &k);
     int *arr = (int *)malloc(n * sizeof(int));
+    int max = 0;
     for (int i = 0; i < n; i++)
     {
         scanf("%d", &arr[i]);
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
     }
 
-    int size = find_best_size(arr, 0, n - 1, k, n);
+    int size = find_best_size(arr, 0, max - 1, k, n);
     printf("%d\n", size);
 }

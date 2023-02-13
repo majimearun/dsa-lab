@@ -75,7 +75,7 @@ void print_curr(Node *curr)
     }
     else
     {
-        printf("%d\n", curr->data);
+        printf("song: %d\n", curr->data);
     }
 }
 
@@ -123,7 +123,6 @@ Node *exists_in_playlist(Node *head, int song)
     {
         if (head->data == song)
         {
-            printf("%d\n", head->data);
             return head;
         }
         head = head->next;
@@ -140,24 +139,53 @@ Node *add_to_next(Node *head, Node *curr, int song)
     }
 
     Node *exists = exists_in_playlist(head, song);
+
     if (exists == NULL)
     {
         Node *song_node = create_node(song);
         song_node->next = curr->next;
         song_node->prev = curr;
+        if (curr->next != NULL)
+        {
+            curr->next->prev = song_node;
+        }
+        else
+        {
+            song_node->next = NULL;
+        }
         curr->next = song_node;
         return head;
     }
+
     else
     {
-        printf("data: %d\n", exists->data);
-        curr->next->prev = exists;
-        Node *temp = curr->next;
-        curr->next = exists;
-        exists->prev->next = exists->next;
-        exists->next->prev = exists->prev;
+        if (exists->next != NULL)
+        {
+            exists->next->prev = exists->prev;
+            if (exists->prev != NULL)
+            {
+                exists->prev->next = exists->next;
+            }
+            else
+            {
+                head = exists->next;
+            }
+        }
+        else
+        {
+            exists->prev->next = NULL;
+        }
+        exists->next = curr->next;
         exists->prev = curr;
-        exists->next = temp;
+        if (curr->next != NULL)
+        {
+            curr->next->prev = exists;
+        }
+        else
+        {
+            exists->next = NULL;
+        }
+        curr->next = exists;
         return head;
     }
 }
