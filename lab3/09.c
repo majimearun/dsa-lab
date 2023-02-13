@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define int unsigned long long
+#define int long
 
 int find_half_time(int start, int end, int num, int half)
 {
@@ -23,9 +23,9 @@ int find_half_time(int start, int end, int num, int half)
 int main()
 {
     int n;
-    scanf("%lld", &n);
+    scanf("%ld", &n);
     int half = (n * (n - 1) / 2)/2;
     int ht = find_half_time(1, n, n, half);
-    printf("%lld\n", ht);
+    printf("%ld\n", ht);
     return 0;
 }
