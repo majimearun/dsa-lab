@@ -67,9 +67,14 @@ void print_list(Node *head)
     printf("\n");
 }
 
-int main()
+struct split
 {
-    Node *head = read_list();
+    int a;
+    int b;
+};
+
+struct split find_best_split(Node *head)
+{
     Node *tail = head;
     while (tail->next != NULL)
     {
@@ -109,5 +114,13 @@ int main()
             a++;
         }
     }
-    printf("%d %d\n", max_equals_a, max_equals_b);
+    struct split answer = {max_equals_a, max_equals_b};
+    return answer;
+}
+
+int main()
+{
+    Node *head = read_list();
+    struct split answer= find_best_split(head);
+    printf("%d %d\n", answer.a, answer.b);
 }
