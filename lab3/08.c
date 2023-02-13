@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define int long long
+#define int unsigned long long
 
 int find_sqrt(int start, int end, int num)
 {
@@ -9,7 +9,8 @@ int find_sqrt(int start, int end, int num)
     {
         mid++;
     }
-    if(start == end){
+    if (start == end)
+    {
         return start;
     }
     if ((mid * mid) < num)
