@@ -48,6 +48,10 @@ int main()
             k++;
             team = arr[start];
         }
+        else
+        {
+            break
+        }
     }
     printf("%d\n", k);
 }
