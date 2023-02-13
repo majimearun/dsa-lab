@@ -13,13 +13,14 @@ int find_max_deduction(int *arr, int start, int end, int k)
     {
         mid = (start + end) / 2;
     }
-    if (mid == end)
+    if (start == end || arr[mid] == k)
     {
-        return arr[mid];
+
+        return arr[start];
     }
     else
     {
-        if (arr[mid] <= k)
+        if (arr[mid] < k)
         {
             return find_max_deduction(arr, mid, end, k);
         }
@@ -40,7 +41,7 @@ int main()
     {
         scanf("%lld", &arr[i]);
     }
-    int max = find_max_deduction(arr, 0, n - 1, k);
+    int max = find_max_deduction(arr, 0, n, k);
     printf("%lld\n", max);
     return 0;
 }
