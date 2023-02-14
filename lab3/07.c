@@ -18,7 +18,7 @@ int find_max_deduction(int *arr, int start, int end, int k)
 
         return arr[start];
     }
-    if (arr[k] == mid)
+    if (arr[mid] == k)
     {
         return mid;
     }
