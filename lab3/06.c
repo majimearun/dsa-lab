@@ -4,9 +4,13 @@
 int find_last_occurence(int *arr, int start, int end, int team)
 {
     int mid = (start + end) / 2;
+    if (start + end % 2)
+    {
+        mid++;
+    }
     if (arr[mid] == team)
     {
-        if (arr[mid + 1] != team)
+        if (mid == end || arr[mid + 1] != team)
         {
             return mid;
         }
