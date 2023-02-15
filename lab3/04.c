@@ -16,6 +16,7 @@ Node *create_node(int val)
     node->next = NULL;
     node->prev = NULL;
     node->data = val;
+    return node;
 }
 
 Node *add_to_list(Node *head, int val)
@@ -121,6 +122,6 @@ struct split find_best_split(Node *head)
 int main()
 {
     Node *head = read_list();
-    struct split answer= find_best_split(head);
+    struct split answer = find_best_split(head);
     printf("%d %d\n", answer.a, answer.b);
 }

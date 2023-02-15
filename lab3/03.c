@@ -16,6 +16,7 @@ Node *create_node(int val)
     node->next = NULL;
     node->prev = NULL;
     node->data = val;
+    return node;
 }
 
 Node *add_to_list(Node *head, int val)
