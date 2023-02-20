@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define int long long
 
 int gcd(int a, int b)
 {
@@ -13,9 +14,9 @@ int gcd(int a, int b)
 int main()
 {
     int a, b;
-    scanf("%d %d", &a, &b);
+    scanf("%lld %lld", &a, &b);
     int max_coprime = 0;
-    for (int i = 0; i < a; i++)
+    for (int i = 1; i * i <= a; i++)
     {
         if (a % i == 0)
         {
@@ -26,7 +27,16 @@ int main()
                     max_coprime = i;
                 }
             }
+            if (gcd(a / i, b) == 1)
+            {
+
+                if (a / i > max_coprime)
+                {
+                    max_coprime = a / i;
+                }
+            }
         }
     }
-    printf("%d", max_coprime);
+    printf("%lld\n", max_coprime);
+    return 0;
 }
