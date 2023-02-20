@@ -96,6 +96,7 @@ int main()
         }
     }
     printf("------\n");
+    printf("%d\n", new_slots_count);
     for (int i = 0; i < new_slots_count; i++)
     {
         printf("%d %d\n", new_slots[i].start, new_slots[i].end);
