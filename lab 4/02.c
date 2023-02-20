@@ -59,4 +59,5 @@ int main()
 
     int size = find_best_score(arr, 0, max - 1, n);
     printf("%d\n", size);
+    return 0;
 }

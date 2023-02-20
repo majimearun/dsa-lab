@@ -16,4 +16,5 @@ int main()
     int min_plus_sum = min_kings * (min_kings + 1) / 2;
     min = (min * min_sum) + (min_plus * min_plus_sum);
     printf("%d %d", min, max);
+    return 0;
 }

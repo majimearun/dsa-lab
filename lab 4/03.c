@@ -53,4 +53,5 @@ int main()
         total += max_trail[i] * (max_trail[i] - 1) / 2;
     }
     printf("%d\n", total);
+    return 0;
 }

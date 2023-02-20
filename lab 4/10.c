@@ -25,4 +25,5 @@ int main()
         }
     }
     printf("%d\n", moves);
+    return 0;
 }

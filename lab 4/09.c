@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define int long long
 
 int gcd(int a, int b)
 {
@@ -13,11 +14,11 @@ int gcd(int a, int b)
 int main()
 {
     int n;
-    scanf("%d", &n);
+    scanf("%lld", &n);
     int arr[n];
     for (int i = 0; i < n; i++)
     {
-        scanf("%d", &arr[i]);
+        scanf("%lld", &arr[i]);
     }
     int gcd_from_start[n];
     gcd_from_start[0] = arr[0];
@@ -52,5 +53,6 @@ int main()
             max_gcd = temp_gcd;
         }
     }
-    printf("%d\n", max_gcd);
+    printf("%lld\n", max_gcd);
+    return 0;
 }
