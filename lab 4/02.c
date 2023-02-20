@@ -1,68 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void mergeSort(int *arr, int start, int end)
+#include <stdio.h>
+#include <stdlib.h>
+
+int check(int *arr, int n, int score)
 {
-    if (start >= end)
-    {
-        return;
-    }
-    int mid = (start + end) / 2;
-    mergeSort(arr, start, mid);
-    mergeSort(arr, mid + 1, end);
-    int *temp = malloc(sizeof(int) * (end - start + 1));
-    int i = start;
-    int j = mid + 1;
-    int k = 0;
-    while (i <= mid && j <= end)
-    {
-        if (arr[i] < arr[j])
-        {
-            temp[k] = arr[i];
-            i++;
-        }
-        else
-        {
-            temp[k] = arr[j];
-            j++;
-        }
-        k++;
-    }
-    while (i <= mid)
-    {
-        temp[k] = arr[i];
-        i++;
-        k++;
-    }
-    while (j <= end)
-    {
-        temp[k] = arr[j];
-        j++;
-        k++;
-    }
-    for (int i = start; i <= end; i++)
-    {
-        arr[i] = temp[i - start];
-    }
-    free(temp);
-}
-int main()
-{
-    int n;
-    scanf("%d", &n);
-    int doggos[n];
+    int count = 0;
     for (int i = 0; i < n; i++)
     {
-        scanf("%d", &doggos[i]);
-    }
-    mergeSort(doggos, 0, n - 1);
-    for (int i = n - 1; i >= 0; i--)
-    {
-        if (doggos[i] <= n - i)
+        if (arr[i] >= score)
         {
-            printf("%d\n", doggos[i]);
-            return 0;
+            count++;
+        }
+        if (count == score)
+        {
+            return 1;
         }
     }
     return 0;
+}
+
+int find_best_score(int *arr, int start, int end, int n)
+{
+    int mid = (start + end) / 2;
+    if ((start + end) % 2)
+    {
+        mid++;
+    }
+    if (start == end)
+    {
+        return mid;
+    }
+    if (check(arr, n, mid))
+    {
+        return find_best_score(arr, mid, end, n);
+    }
+    else
+    {
+        return find_best_score(arr, start, mid - 1, n);
+    }
+}
+
+int main()
+{
+    int n, k;
+    scanf("%d", &n);
+    int *arr = (int *)malloc(n * sizeof(int));
+    int max = 0;
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+    }
+
+    int size = find_best_score(arr, 0, max - 1, n);
+    printf("%d\n", size);
 }
