@@ -9,15 +9,15 @@ struct slot
 
 typedef struct slot slot;
 
-void mergeSort(slot *slots, int start, int end)
+void merge_sort(slot *slots, int start, int end)
 {
     if (start >= end)
     {
         return;
     }
     int mid = (start + end) / 2;
-    mergeSort(slots, start, mid);
-    mergeSort(slots, mid + 1, end);
+    merge_sort(slots, start, mid);
+    merge_sort(slots, mid + 1, end);
     slot *temp = malloc(sizeof(slot) * (end - start + 1));
     int i = start;
     int j = mid + 1;
@@ -64,38 +64,41 @@ int main()
     {
         int s, e;
         scanf("%d %d", &s, &e);
-        slot *newSlot = malloc(sizeof(slot));
-        newSlot->start = s;
-        newSlot->end = e;
-        slots[i] = *newSlot;
+        slot *new_slot = malloc(sizeof(slot));
+        new_slot->start = s;
+        new_slot->end = e;
+        slots[i] = *new_slot;
     }
-    mergeSort(slots, 0, n - 1);
-    slot newSlots[n];
-    int newSlotsCount = 0;
+    merge_sort(slots, 0, n - 1);
+    slot new_slots[n];
+    int new_slots_count = 0;
     for (int i = 0; i < n; i++)
     {
-        if (newSlotsCount == 0)
+        if (new_slots_count == 0)
         {
-            newSlots[newSlotsCount] = slots[i];
-            newSlotsCount++;
+            new_slots[new_slots_count] = slots[i];
+            new_slots_count++;
         }
         else
         {
-            if (slots[i].start <= newSlots[newSlotsCount - 1].end)
+            if (slots[i].start <= new_slots[new_slots_count - 1].end)
             {
-                newSlots[newSlotsCount - 1].end = slots[i].end;
+                new_slots[new_slots_count - 1].end = slots[i].end;
+                new_slots[new_slots_count - 1].start = slots[i].start > new_slots[new_slots_count - 1].start
+                                                           ? new_slots[new_slots_count - 1].start
+                                                           : slots[i].start;
             }
             else
             {
-                newSlots[newSlotsCount] = slots[i];
-                newSlotsCount++;
+                new_slots[new_slots_count] = slots[i];
+                new_slots_count++;
             }
         }
     }
     printf("------\n");
-    for (int i = 0; i < newSlotsCount; i++)
+    for (int i = 0; i < new_slots_count; i++)
     {
-        printf("%d %d\n", newSlots[i].start, newSlots[i].end);
+        printf("%d %d\n", new_slots[i].start, new_slots[i].end);
     }
     return 0;
 }
