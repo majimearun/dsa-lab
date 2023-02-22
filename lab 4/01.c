@@ -81,7 +81,8 @@ int main()
         }
         else
         {
-            if (slots[i].end >= new_slots[new_slots_count - 1].start)
+            if (slots[i].start >= new_slots[new_slots_count - 1].start &&
+                slots[i].start <= new_slots[new_slots_count - 1].end)
             {
                 new_slots[new_slots_count - 1].end = slots[i].end > new_slots[new_slots_count - 1].end
                                                          ? slots[i].end
