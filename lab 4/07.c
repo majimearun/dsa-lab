@@ -26,7 +26,7 @@ void count_sort(int array[], int n, int place)
     }
     int count[max + 1];
 
-    for (int i = 0; i < max; ++i)
+    for (int i = 0; i <= max; ++i)
     {
         count[i] = 0;
     }

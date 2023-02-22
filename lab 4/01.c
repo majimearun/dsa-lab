@@ -24,7 +24,7 @@ void merge_sort(slot *slots, int start, int end)
     int k = 0;
     while (i <= mid && j <= end)
     {
-        if (slots[i].end < slots[j].end)
+        if (slots[i].start < slots[j].start)
         {
             temp[k] = slots[i];
             i++;
@@ -81,12 +81,11 @@ int main()
         }
         else
         {
-            if (slots[i].start <= new_slots[new_slots_count - 1].end)
+            if (slots[i].end >= new_slots[new_slots_count - 1].start)
             {
-                new_slots[new_slots_count - 1].end = slots[i].end;
-                new_slots[new_slots_count - 1].start = slots[i].start > new_slots[new_slots_count - 1].start
-                                                           ? new_slots[new_slots_count - 1].start
-                                                           : slots[i].start;
+                new_slots[new_slots_count - 1].end = slots[i].end > new_slots[new_slots_count - 1].end
+                                                         ? slots[i].end
+                                                         : new_slots[new_slots_count - 1].end;
             }
             else
             {
