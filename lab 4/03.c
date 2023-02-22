@@ -22,10 +22,6 @@ int main()
     }
 
     int trail[n];
-    for (int i = 0; i < n; i++)
-    {
-        trail[i] = 0;
-    }
 
     int max = 0;
     for (int i = 0; i < n; i++)

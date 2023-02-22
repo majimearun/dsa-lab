@@ -44,7 +44,7 @@ int find_best_score(int *arr, int start, int end, int n)
 
 int main()
 {
-    int n, k;
+    int n;
     scanf("%d", &n);
     int *arr = (int *)malloc(n * sizeof(int));
     int max = 0;
@@ -57,7 +57,7 @@ int main()
         }
     }
 
-    int size = find_best_score(arr, 0, max - 1, n);
-    printf("%d\n", size);
+    int score = find_best_score(arr, 0, n, n);
+    printf("%d\n", score);
     return 0;
 }

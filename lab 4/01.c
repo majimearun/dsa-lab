@@ -64,10 +64,10 @@ int main()
     {
         int s, e;
         scanf("%d %d", &s, &e);
-        slot *new_slot = malloc(sizeof(slot));
-        new_slot->start = s;
-        new_slot->end = e;
-        slots[i] = *new_slot;
+        slot new_slot;
+        new_slot.start = s;
+        new_slot.end = e;
+        slots[i] = new_slot;
     }
     merge_sort(slots, 0, n - 1);
     slot new_slots[n];
