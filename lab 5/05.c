@@ -4,9 +4,9 @@ int find_max_bombs(int arr[], int n, int k)
 {
     int l, r;
     l = r = 0;
-    int count = arr[0] ? 0 : 1;
+    int count = arr[0] ? 0 : k > 0 ? 1 : 0;
     int sum = 0;
-    if (k > 0)
+    if (k > 0 || arr[0])
     {
         sum = 1;
     }

@@ -1,11 +1,18 @@
 #include <stdio.h>
 
-int find_n_kool(int arr[], int n, int k)
+int find_n_kool(int arr[], int n, int k, int ones[])
 {
     int l, r;
     l = r = 0;
     int count = arr[0] % 2 ? 1 : 0;
     int n_arr = 0;
+    int flag = 0;
+    int posn = 0;
+    int i = 0;
+    if (arr[0] % 2)
+    {
+        ones[0] = 0;
+    }
     while (r < n)
     {
         while (count < k)
@@ -18,6 +25,12 @@ int find_n_kool(int arr[], int n, int k)
             if (arr[r] % 2)
             {
                 count++;
+                ones[count - 1] = r;
+                if (flag == 0)
+                {
+                    flag = 1;
+                    posn = ones[i] != -1 ? ones[i] : r;
+                }
             }
         }
         if (r == n)
@@ -26,7 +39,13 @@ int find_n_kool(int arr[], int n, int k)
         }
         if (count == k)
         {
-            n_arr++;
+            flag = 1;
+            n_arr = n_arr + (posn - l + 1);
+            while (r < n - 1 && arr[r + 1] % 2 == 0)
+            {
+                r++;
+                n_arr = n_arr + (posn - l + 1);
+            }
         }
 
         while (count == k)
@@ -37,6 +56,8 @@ int find_n_kool(int arr[], int n, int k)
             }
             l++;
         }
+        flag = 0;
+        i++;
     }
     return n_arr;
 }
@@ -51,7 +72,12 @@ int main()
     {
         scanf("%d", &arr[i]);
     }
-    int n_kool = find_n_kool(arr, n, k);
+    int ones[n];
+    for (int i = 0; i < n; i++)
+    {
+        ones[i] = -1;
+    }
+    int n_kool = find_n_kool(arr, n, k, ones);
     printf("%d\n", n_kool);
     return 0;
 }
