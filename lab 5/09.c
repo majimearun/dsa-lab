@@ -28,6 +28,7 @@ int find_n_kool(int arr[], int n, int k, int ones[])
                 ones[count - 1] = r;
                 if (flag == 0)
                 {
+                    // identifying position of first odd number in the window
                     flag = 1;
                     posn = ones[i] != -1 ? ones[i] : r;
                 }
@@ -39,7 +40,6 @@ int find_n_kool(int arr[], int n, int k, int ones[])
         }
         if (count == k)
         {
-            flag = 1;
             n_arr = n_arr + (posn - l + 1);
             while (r < n - 1 && arr[r + 1] % 2 == 0)
             {
