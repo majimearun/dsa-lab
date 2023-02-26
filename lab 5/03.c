@@ -1,58 +1,64 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int check(char string[], int n, int l, int r, int k)
+int update_freq(int freq[], int k, char alpha, int adding)
 {
-    char required[k];
-    for (int i = 0; i < k; i++)
+    if (adding)
     {
-        required[i] = (char)(97 + i);
-    }
-    int count = 0;
-    for (int i = l; i <= r; i++)
-    {
-        for (int j = 0; j < k; j++)
+        int i = (int)(alpha - 97);
+        if (i < k)
         {
-            if (string[i] == required[j])
-            {
-                required[j] = '0';
-                count++;
-                break;
-            }
+            freq[i]--;
         }
-        if (count == k)
-        {
-            return 1;
-        }
-    }
-    if (count == k)
-    {
-        return 1;
     }
     else
     {
-        return 0;
+        int i = (int)(alpha - 97);
+        if (i < k)
+        {
+            freq[i]++;
+        }
     }
 }
+int check(int freq[], int k)
+{
+    for (int i = 0; i < k; i++)
+    {
+        if (freq[i] > 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
 
-int n_window(int n, int k, char *alphabet)
+int n_window(int n, int k, char *string)
 {
     int count = 0;
     int l = 0;
     int r = 0;
+    int freq[k];
+    for (int i = 0; i < k; i++)
+    {
+
+        freq[i] = 1;
+    }
+    update_freq(freq, k, string[0], 1);
     while (r < n)
     {
-        if (check(alphabet, n, l, r, k))
+        if (check(freq, k))
         {
-            while (check(alphabet, n, l, r, k))
+            while (check(freq, k))
             {
                 count += n - r;
+                update_freq(freq, k, string[l], 0);
                 l++;
             }
         }
         else
         {
             r++;
+            update_freq(freq, k, string[r], 1);
         }
     }
     return count;
