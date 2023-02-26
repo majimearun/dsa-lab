@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int find_n_kool(int arr[], int n, int k, int ones[])
+int find_n_kool(int arr[], int n, int k, int odd_posns[])
 {
     int l, r;
     l = r = 0;
@@ -11,7 +11,7 @@ int find_n_kool(int arr[], int n, int k, int ones[])
     int i = 0;
     if (arr[0] % 2)
     {
-        ones[0] = 0;
+        odd_posns[0] = 0;
     }
     while (r < n)
     {
@@ -25,12 +25,12 @@ int find_n_kool(int arr[], int n, int k, int ones[])
             if (arr[r] % 2)
             {
                 count++;
-                ones[count - 1] = r;
+                odd_posns[count - 1] = r;
                 if (flag == 0)
                 {
                     // identifying position of first odd number in the window
                     flag = 1;
-                    posn = ones[i] != -1 ? ones[i] : r;
+                    posn = odd_posns[i] != -1 ? odd_posns[i] : r;
                 }
             }
         }
@@ -72,12 +72,12 @@ int main()
     {
         scanf("%d", &arr[i]);
     }
-    int ones[n];
+    int odd_posns[n];
     for (int i = 0; i < n; i++)
     {
-        ones[i] = -1;
+        odd_posns[i] = -1;
     }
-    int n_kool = find_n_kool(arr, n, k, ones);
+    int n_kool = find_n_kool(arr, n, k, odd_posns);
     printf("%d\n", n_kool);
     return 0;
 }
