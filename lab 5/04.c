@@ -1,21 +1,31 @@
 #include <stdio.h>
 
-int find_grps(int arr[], int n, int k, int thresh_avg)
+int find_grps(int cum_sum_arr[], int n, int k, int thresh_avg)
 {
-    int start = 0;
     int count = 0;
-    while (start <= n - k)
+    for (int start = 0; start < n - k + 1; start++)
     {
-        int sum = 0;
-        for (int i = start; i < start + k; i++)
+        if (start == 0)
         {
-            sum += arr[i];
+            if ((cum_sum_arr[start + k - 1]) / k >= thresh_avg)
+            {
+                count++;
+            }
         }
-        if (sum / k >= thresh_avg)
+        else if (start == n - k)
         {
-            count++;
+            if ((cum_sum_arr[n - 1] - cum_sum_arr[start - 1]) / k >= thresh_avg)
+            {
+                count++;
+            }
         }
-        start += 1;
+        else
+        {
+            if ((cum_sum_arr[start + k - 1] - cum_sum_arr[start - 1]) / k >= thresh_avg)
+            {
+                count++;
+            }
+        }
     }
     return count;
 }
@@ -30,7 +40,13 @@ int main()
     {
         scanf("%d", &arr[i]);
     }
-    int grps = find_grps(arr, n, k, thresh_avg);
+    int cum_sum[n];
+    cum_sum[0] = arr[0];
+    for (int i = 1; i < n; i++)
+    {
+        cum_sum[i] = cum_sum[i - 1] + arr[i];
+    }
+    int grps = find_grps(cum_sum, n, k, thresh_avg);
     printf("%d\n", grps);
     return 0;
 }

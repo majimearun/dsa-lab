@@ -32,10 +32,6 @@ int main()
     scanf("%d", &n);
     int possible = 0;
     char **perms = malloc(sizeof(char *) * 500);
-    for (int i = 0; i < 500; i++)
-    {
-        perms[i] = malloc(sizeof(char) * n);
-    }
     possible = bracket_possibilities(n, perms, 0, 0, 0, malloc(sizeof(char) * (n + 1)));
     printf("%d\n", possible);
     for (int i = 0; i < possible; i++)
