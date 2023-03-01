@@ -36,7 +36,7 @@ void count_sort(int array[], int n, int place)
         count[(array[i] / place) % 10]++;
     }
 
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < max + 1; i++)
     {
         count[i] += count[i - 1];
     }
