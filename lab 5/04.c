@@ -12,13 +12,13 @@ int find_grps(int cum_sum_arr[], int n, int k, int thresh_avg)
                 count++;
             }
         }
-        else if (start == n - k)
-        {
-            if ((cum_sum_arr[n - 1] - cum_sum_arr[start - 1]) / k >= thresh_avg)
-            {
-                count++;
-            }
-        }
+        // else if (start == n - k)
+        // {
+        //     if ((cum_sum_arr[n - 1] - cum_sum_arr[start - 1]) / k >= thresh_avg)
+        //     {
+        //         count++;
+        //     }
+        // }
         else
         {
             if ((cum_sum_arr[start + k - 1] - cum_sum_arr[start - 1]) / k >= thresh_avg)

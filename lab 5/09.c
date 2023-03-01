@@ -38,7 +38,6 @@ int main()
     {
         scanf("%d", &arr[i]);
     }
-    int odd_posns[n];
     int n_kool = find_n_kool(arr, n, k);
     printf("%d\n", n_kool);
     return 0;
