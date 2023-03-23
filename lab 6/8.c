@@ -76,20 +76,23 @@ int find_position(int n, int k)
     {
         enqueue(&q, i, n);
     }
-    // Keep removing every kth person until only one person is left
     while (!is_empty(&q))
     {
-        for (int i = 1; i < k; i++)
+        // Remove the next k-1 elements from the queue
+        for (int i = 0; i < k - 1; i++)
         {
-            enqueue(&q, dequeue(&q, n), n);
+            int y = dequeue(&q, n);
+            // And add them to the back of the queue
+            enqueue(&q, y, n);
         }
-        int out = dequeue(&q, n);
-        if (q.front == q.rear)
+        // Remove the first element from the queue
+        int x = dequeue(&q, n);
+        // If the queue is empty, return the element
+        if (is_empty(&q))
         {
-            return out;
+            return x;
         }
     }
-    return -1;
 }
 
 int main()
