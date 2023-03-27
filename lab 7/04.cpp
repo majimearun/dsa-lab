@@ -2,32 +2,17 @@
 
 using namespace std;
 
-struct TreeNode
+void fn(int arr[], int i, int n, int &sum)
 {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr)
-    {
-    }
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr)
-    {
-    }
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right)
-    {
-    }
-};
+    // static int sum = 0;
 
-TreeNode *createTree(int arr[], int n, int i)
-{
-    if (i >= n)
+    if (arr[i] != -1 && i < n)
     {
-        return nullptr;
+        fn(arr, 2 * i + 2, n, sum);
+        sum += arr[i];
+        arr[i] = sum;
+        fn(arr, 2 * i + 1, n, sum);
     }
-    TreeNode *root = new TreeNode(arr[i]);
-    root->left = arr[2 * i + 1] == -1 ? nullptr : createTree(arr, n, 2 * i + 1);
-    root->right = arr[2 * i + 2] == -1 ? nullptr : createTree(arr, n, 2 * i + 2);
-    return root;
 }
 
 int main()
@@ -35,10 +20,19 @@ int main()
     int n;
     cin >> n;
     int arr[n];
+
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
 
-    TreeNode *root = createTree(arr, n, 0);
+    int i = 0;
+    fn(arr, 0, n, i);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
 }
