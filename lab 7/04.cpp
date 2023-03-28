@@ -4,7 +4,6 @@ using namespace std;
 
 void fn(int arr[], int i, int n, int &sum)
 {
-    // static int sum = 0;
 
     if (arr[i] != -1 && i < n)
     {
