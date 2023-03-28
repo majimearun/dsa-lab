@@ -2,61 +2,71 @@
 
 using namespace std;
 
-void print_post_order(int *arr, int n, int i)
+struct TreeNode
 {
-    if (i < n && arr[i] == -1)
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr)
     {
-        print_post_order(arr, n, 2 * i + 1);
-        print_post_order(arr, n, 2 * i + 2);
     }
-    else if (i < n)
+};
+
+TreeNode *createTree(int arr[], int n, int i)
+{
+    if (i >= n)
     {
-        print_post_order(arr, n, 2 * i + 1);
-        print_post_order(arr, n, 2 * i + 2);
-        cout << arr[i] << " ";
+        return nullptr;
     }
+    TreeNode *root = new TreeNode(arr[i]);
+    root->left = arr[2 * i + 1] == -1 ? nullptr : createTree(arr, n, 2 * i + 1);
+    root->right = arr[2 * i + 2] == -1 ? nullptr : createTree(arr, n, 2 * i + 2);
+    return root;
 }
 
-void delete_not_in_range(int *arr, int n, int i, int l, int r)
+TreeNode *delete_if_not_in_range(TreeNode *root, int l, int r)
 {
-    if (arr[i] == -1)
+    if (root == nullptr)
+    {
+        return nullptr;
+    }
+    if (root->val < l)
+    {
+        return delete_if_not_in_range(root->right, l, r);
+    }
+    if (root->val > r)
+    {
+        return delete_if_not_in_range(root->left, l, r);
+    }
+    root->left = delete_if_not_in_range(root->left, l, r);
+    root->right = delete_if_not_in_range(root->right, l, r);
+    return root;
+}
+
+void printTree(TreeNode *root)
+{
+    if (root == nullptr)
     {
         return;
     }
-    if (i < n)
-    {
-        delete_not_in_range(arr, n, 2 * i + 1, l, r);
-        delete_not_in_range(arr, n, 2 * i + 2, l, r);
-        if (arr[i] < l || arr[i] > r)
-        {
-            arr[i] = -1;
-        }
-    }
-}
-
-int find_first_index_not_minus_one(int *arr, int n, int i)
-{
-    if (i < n && arr[i] == -1)
-    {
-        return find_first_index_not_minus_one(arr, n, i + 1);
-    }
-    else
-    {
-        return i;
-    }
+    printTree(root->left);
+    printTree(root->right);
+    cout << root->val << " ";
 }
 
 int main()
 {
     int n, l, r;
     cin >> n >> l >> r;
-    int *arr = new int[n];
+    int arr[n];
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
-    delete_not_in_range(arr, n, 0, l, r);
-    print_post_order(arr, n, find_first_index_not_minus_one(arr, n, 0));
+    auto root = createTree(arr, n, 0);
+    auto bst = delete_if_not_in_range(root, l, r);
+
+    printTree(bst);
     cout << endl;
     return 0;
 }
