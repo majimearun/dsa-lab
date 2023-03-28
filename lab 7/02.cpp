@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -7,13 +8,7 @@ struct TreeNode
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr)
-    {
-    }
     TreeNode(int x) : val(x), left(nullptr), right(nullptr)
-    {
-    }
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right)
     {
     }
 };
@@ -60,15 +55,43 @@ TreeNode *buildTree(int *preorder, int *inorder, int n)
     return buildTreeHelper(preorder, inorder, n, 0, 0, n - 1);
 }
 
-void printTree(TreeNode *root)
+int find_height(TreeNode *root)
 {
     if (root == nullptr)
     {
+        return 0;
+    }
+    return 1 + max(find_height(root->left), find_height(root->right));
+}
+
+void print_current_level(TreeNode *root, int level)
+{
+    if (root == nullptr)
+    {
+        for (int i = 0; i < pow(2, level - 1); i++)
+        {
+            cout << "-1 ";
+        }
         return;
     }
-    cout << root->val << " ";
-    printTree(root->left);
-    printTree(root->right);
+    if (level == 1)
+    {
+        cout << root->val << " ";
+    }
+    else
+    {
+        print_current_level(root->left, level - 1);
+        print_current_level(root->right, level - 1);
+    }
+}
+
+void printTree(TreeNode *root)
+{
+    int height = find_height(root);
+    for (int i = 1; i <= height; i++)
+    {
+        print_current_level(root, i);
+    }
 }
 
 int main()
