@@ -6,14 +6,13 @@ int main()
 {
     int n;
     cin >> n;
-    vector<pair<int, int>> bottles(n);
+    vector<int> bottles(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> bottles[i].first;
-        bottles[i].second = i;
+        cin >> bottles[i];
     }
 
-    priority_queue<pair<int, int>> pq(bottles.begin(), bottles.end());
+    priority_queue<int> pq(bottles.begin(), bottles.end());
 
     int count = 0, sum = 0;
     while (!pq.empty())
@@ -21,9 +20,9 @@ int main()
         auto elem = pq.top();
         pq.pop();
 
-        if (sum + elem.first >= 0)
+        if (sum + elem >= 0)
         {
-            sum += elem.first;
+            sum += elem;
             count++;
         }
         else
@@ -32,14 +31,14 @@ int main()
             {
                 elem = pq.top();
                 pq.pop();
-                if (sum + elem.first >= 0)
+                if (sum + elem >= 0)
                 {
-                    sum += elem.first;
+                    sum += elem;
                     count++;
                     break;
                 }
             }
-            if (sum + elem.first < 0)
+            if (sum + elem < 0)
             {
                 break;
             }
