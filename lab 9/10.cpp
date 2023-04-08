@@ -2,8 +2,10 @@
 
 using namespace std;
 
-int n_platforms(vector<pair<int, int>> trains, int n)
+int n_platforms(vector<pair<int, int>> trains)
 {
+
+    int n = trains.size();
     sort(trains.begin(), trains.end());
 
     priority_queue<int, vector<int>, greater<int>> p;
@@ -40,6 +42,6 @@ int main()
         cin >> arr >> dep;
         trains.push_back({arr, dep});
     }
-    cout << n_platforms(trains, n) << endl;
+    cout << n_platforms(trains) << endl;
     return 0;
 }
