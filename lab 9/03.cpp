@@ -45,7 +45,6 @@ int main()
     {
         cin >> arr[i];
     }
-
-    cout << sum_subarray_ranges(arr, n) << endl;
+    std::cout << sum_subarray_ranges(arr, n) << endl;
     return 0;
 }
