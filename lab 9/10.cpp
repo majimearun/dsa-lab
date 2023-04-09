@@ -6,6 +6,7 @@ int n_platforms(vector<pair<int, int>> trains)
 {
 
     int n = trains.size();
+    // need to replace this sort with custom one jic
     sort(trains.begin(), trains.end());
 
     priority_queue<int, vector<int>, greater<int>> p;
