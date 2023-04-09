@@ -2,12 +2,34 @@
 
 using namespace std;
 
-int n_platforms(vector<pair<int, int>> trains)
+typedef pair<int, int> pii;
+
+struct Compare
+{
+    bool operator()(pii a, pii b)
+    {
+        return a.first > b.first;
+    }
+};
+
+int n_platforms(vector<pii> trains)
 {
 
     int n = trains.size();
     // need to replace this sort with custom one jic
-    sort(trains.begin(), trains.end());
+    // sort(trains.begin(), trains.end());
+    priority_queue<pii, vector<pii>, Compare> pq;
+
+    for (int i = 0; i < n; i++)
+    {
+        pq.push(trains.at(i));
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        trains.at(i) = pq.top();
+        pq.pop();
+    }
 
     priority_queue<int, vector<int>, greater<int>> p;
 
@@ -37,7 +59,7 @@ int main()
     int n;
     cin >> n;
     int arr, dep;
-    vector<pair<int, int>> trains;
+    vector<pii> trains;
     for (int i = 0; i < n; i++)
     {
         cin >> arr >> dep;
