@@ -23,11 +23,13 @@ int main()
 
         if (sum + elem >= 0)
         {
+            cout << elem << endl;
             sum += elem;
             count++;
         }
         else
         {
+            cout << elem << endl;
             while (!pq.empty())
             {
                 elem = pq.top();
