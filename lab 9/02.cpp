@@ -42,11 +42,6 @@ int main()
         prefix_sum.at(i) = count;
     }
 
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cout << search.at(i).at(0) << " " << search.at(i).at(1) << " " << prefix_sum.at(i) << endl;
-    // }
-
     for (int i = 0; i < q; i++)
     {
         int l, r;
