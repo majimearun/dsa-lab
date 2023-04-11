@@ -3,49 +3,45 @@
 
 using namespace std;
 
+typedef pair<int, int> pii;
+
 int main()
 {
     int n;
     cin >> n;
-    vector<int> bottles(n);
+    vector<pii> bottles;
+    vector<int> prefix_sum;
+    int count = 0, prefix = 0, sum = 0;
     for (int i = 0; i < n; i++)
     {
-        cin >> bottles[i];
-    }
-
-    priority_queue<int> pq(bottles.begin(), bottles.end());
-
-    int count = 0, sum = 0;
-    while (!pq.empty())
-    {
-        auto elem = pq.top();
-        pq.pop();
-
-        if (sum + elem >= 0)
+        int elem;
+        cin >> elem;
+        if (elem >= 0)
         {
-            cout << elem << endl;
-            sum += elem;
             count++;
+            sum += elem;
+            prefix += elem;
         }
         else
         {
-            cout << elem << endl;
-            while (!pq.empty())
+            bottles.push_back({i, elem});
+        }
+        prefix_sum.push_back(prefix);
+    }
+
+    priority_queue<pii> pq(bottles.begin(), bottles.end());
+
+    while (!pq.empty() && sum >= 0)
+    {
+        if (sum + pq.top().second >= 0)
+        {
+            if (prefix_sum.at(pq.top().first) + pq.top().second >= 0)
             {
-                elem = pq.top();
-                pq.pop();
-                if (sum + elem >= 0)
-                {
-                    sum += elem;
-                    count++;
-                    break;
-                }
-            }
-            if (sum + elem < 0)
-            {
-                break;
+                count++;
+                sum += pq.top().second;
             }
         }
+        pq.pop();
     }
 
     cout << count << endl;
