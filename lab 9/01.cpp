@@ -31,7 +31,7 @@ int main()
 
     priority_queue<pii> pq(bottles.begin(), bottles.end());
 
-    while (!pq.empty() && sum >= 0)
+    while (!pq.empty())
     {
         if (sum + pq.top().second >= 0)
         {
