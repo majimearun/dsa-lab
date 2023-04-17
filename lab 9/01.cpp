@@ -5,6 +5,14 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
+struct Compare
+{
+    bool operator()(pii const &p1, pii const &p2)
+    {
+        return p1.second < p2.second;
+    }
+};
+
 int main()
 {
     int n;
@@ -29,7 +37,7 @@ int main()
         prefix_sum.push_back(prefix);
     }
 
-    priority_queue<pii> pq(bottles.begin(), bottles.end());
+    priority_queue<pii, vector<pii>, Compare> pq(bottles.begin(), bottles.end());
 
     while (!pq.empty())
     {
