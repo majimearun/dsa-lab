@@ -1,6 +1,8 @@
 #include <iostream>
 #include <queue>
 
+// wrong
+
 using namespace std;
 
 int main()
@@ -29,6 +31,7 @@ int main()
     {
         if (q2.top() - q1.top() >= diff)
         {
+            cout << q1.top() << " " << q2.top() << endl;
             count++;
             q2.pop();
         }
