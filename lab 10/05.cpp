@@ -11,11 +11,15 @@ int max_nesting(vector<pair<int, int>> russian_dolls)
             return a.second > b.second;
         return a.first < b.first;
     });
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
-        cout << russian_dolls[i].first << " " << russian_dolls[i].second << endl;
+        for (int j = 0; j < i; j++)
+        {
+            if (russian_dolls[i].first > russian_dolls[j].first && russian_dolls[i].second > russian_dolls[j].second)
+                dp[i] = max(dp[i], dp[j] + 1);
+        }
     }
-    return 0;
+    return *max_element(dp.begin(), dp.end());
 }
 
 int main()
